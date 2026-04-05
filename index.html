@@ -6,124 +6,604 @@
   <title>April Chou — Portfolio</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f9f9f8; color: #1a1a1a; min-height: 100vh; }
-    .wrapper { max-width: 780px; margin: 0 auto; background: #fff; border-left: 0.5px solid #e0e0dc; border-right: 0.5px solid #e0e0dc; min-height: 100vh; }
-    .hero { padding: 3rem 2rem 2rem; border-bottom: 0.5px solid #e0e0dc; }
-    .hero-tag { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: #185fa5; text-transform: uppercase; margin-bottom: 0.75rem; }
-    .hero-name { font-size: 32px; font-weight: 500; color: #1a1a1a; margin-bottom: 0.4rem; }
-    .hero-title { font-size: 16px; color: #666; margin-bottom: 1.25rem; }
-    .hero-bio { font-size: 14px; color: #666; line-height: 1.7; max-width: 560px; }
-    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.25rem; }
-    .tag { font-size: 12px; padding: 4px 12px; border-radius: 999px; background: #f4f4f2; border: 0.5px solid #e0e0dc; color: #666; }
-    .section { padding: 2rem 2rem; }
-    .section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #aaa; margin-bottom: 1.25rem; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
-    .card { background: #fff; border: 0.5px solid #e0e0dc; border-radius: 12px; padding: 1.25rem; }
-    .card-icon { width: 36px; height: 36px; border-radius: 8px; background: #e6f1fb; display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem; }
-    .card-icon svg { width: 18px; height: 18px; stroke: #185fa5; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-    .card-title { font-size: 14px; font-weight: 500; color: #1a1a1a; margin-bottom: 0.4rem; }
-    .card-desc { font-size: 13px; color: #666; line-height: 1.6; }
-    .card-badge { display: inline-block; margin-top: 0.75rem; font-size: 11px; padding: 3px 10px; border-radius: 999px; background: #eaf3de; color: #3b6d11; }
-    .card-badge.ongoing { background: #faeeda; color: #854f0b; }
-    .divider { border: none; border-top: 0.5px solid #e0e0dc; margin: 0 2rem; }
-    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 8px; }
-    .skill-item { background: #f4f4f2; border-radius: 8px; padding: 0.6rem 0.9rem; }
-    .skill-name { font-size: 13px; font-weight: 500; color: #1a1a1a; margin-bottom: 4px; }
-    .skill-bar-bg { height: 3px; background: #e0e0dc; border-radius: 2px; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f3; color: #1a1a1a; }
+    a { color: inherit; text-decoration: none; }
+
+    /* Layout */
+    .wrapper { max-width: 860px; margin: 0 auto; background: #fff; border-left: 0.5px solid #e0e0dc; border-right: 0.5px solid #e0e0dc; min-height: 100vh; }
+
+    /* Nav */
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 1.1rem 2rem; border-bottom: 0.5px solid #e0e0dc; position: sticky; top: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(6px); z-index: 100; }
+    .nav-name { font-size: 14px; font-weight: 500; color: #1a1a1a; }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a { font-size: 13px; color: #888; transition: color 0.15s; }
+    .nav-links a:hover { color: #1a1a1a; }
+
+    /* Hero */
+    .hero { padding: 4rem 2rem 3rem; border-bottom: 0.5px solid #e0e0dc; display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: start; }
+    .hero-left {}
+    .hero-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: #185fa5; text-transform: uppercase; margin-bottom: 0.85rem; }
+    .hero-name { font-size: 38px; font-weight: 500; color: #1a1a1a; margin-bottom: 0.4rem; line-height: 1.15; }
+    .hero-title { font-size: 15px; color: #666; margin-bottom: 1.5rem; }
+    .hero-bio { font-size: 14px; color: #555; line-height: 1.75; max-width: 520px; margin-bottom: 1.5rem; }
+    .hero-stats { display: flex; gap: 2rem; }
+    .stat { }
+    .stat-num { font-size: 22px; font-weight: 500; color: #1a1a1a; }
+    .stat-label { font-size: 12px; color: #999; margin-top: 2px; }
+    .hero-avatar { width: 110px; height: 110px; border-radius: 50%; background: linear-gradient(135deg, #e6f1fb 0%, #b5d4f4 100%); display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 500; color: #185fa5; flex-shrink: 0; border: 0.5px solid #e0e0dc; }
+
+    /* Tags */
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; padding: 1.5rem 2rem; border-bottom: 0.5px solid #e0e0dc; }
+    .tag { font-size: 12px; padding: 4px 12px; border-radius: 999px; background: #f4f4f2; border: 0.5px solid #e0e0dc; color: #555; }
+
+    /* Sections */
+    .section { padding: 2.5rem 2rem; }
+    .section + .section { border-top: 0.5px solid #e0e0dc; }
+    .section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #bbb; margin-bottom: 1.5rem; }
+
+    /* Project cards */
+    .project-card { border: 0.5px solid #e0e0dc; border-radius: 12px; overflow: hidden; margin-bottom: 16px; }
+    .project-card:last-child { margin-bottom: 0; }
+    .project-visual { background: #f0f4f9; height: 220px; display: flex; align-items: center; justify-content: center; overflow: hidden; border-bottom: 0.5px solid #e0e0dc; }
+    .project-visual svg { width: 100%; height: 100%; }
+    .project-body { padding: 1.25rem 1.5rem; display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start; }
+    .project-title { font-size: 15px; font-weight: 500; color: #1a1a1a; margin-bottom: 0.4rem; }
+    .project-desc { font-size: 13px; color: #666; line-height: 1.65; }
+    .project-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex-shrink: 0; }
+    .badge { font-size: 11px; padding: 3px 10px; border-radius: 999px; white-space: nowrap; }
+    .badge-green { background: #eaf3de; color: #3b6d11; }
+    .badge-amber { background: #faeeda; color: #854f0b; }
+    .badge-blue { background: #e6f1fb; color: #185fa5; }
+    .project-tools { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 0.75rem; }
+    .tool-tag { font-size: 11px; padding: 2px 8px; border-radius: 4px; background: #f4f4f2; color: #888; border: 0.5px solid #e0e0dc; }
+
+    /* Skills */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+    .skill-item { background: #f9f9f8; border: 0.5px solid #e0e0dc; border-radius: 8px; padding: 0.75rem 1rem; }
+    .skill-name { font-size: 13px; font-weight: 500; color: #1a1a1a; margin-bottom: 6px; }
+    .skill-bar-bg { height: 3px; background: #e8e8e4; border-radius: 2px; }
     .skill-bar { height: 3px; border-radius: 2px; background: #185fa5; }
-    .contact-row { display: flex; flex-wrap: wrap; gap: 12px; }
-    .contact-item { font-size: 13px; color: #666; display: flex; align-items: center; gap: 6px; }
-    .contact-item span { color: #1a1a1a; font-weight: 500; }
-    .footer { padding: 1.5rem 2rem; border-top: 0.5px solid #e0e0dc; }
-    @media (max-width: 500px) {
-      .hero { padding: 2rem 1.25rem 1.5rem; }
-      .section { padding: 1.5rem 1.25rem; }
-      .divider { margin: 0 1.25rem; }
-      .footer { padding: 1.25rem; }
+    .skill-level { font-size: 11px; color: #aaa; margin-top: 4px; }
+
+    /* About */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .about-card { background: #f9f9f8; border: 0.5px solid #e0e0dc; border-radius: 10px; padding: 1.1rem 1.25rem; }
+    .about-card-label { font-size: 11px; color: #aaa; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.4rem; }
+    .about-card-value { font-size: 14px; color: #1a1a1a; font-weight: 500; line-height: 1.5; }
+
+    /* Contact */
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+    .contact-card { background: #f9f9f8; border: 0.5px solid #e0e0dc; border-radius: 10px; padding: 1rem 1.25rem; }
+    .contact-label { font-size: 11px; color: #aaa; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.3rem; }
+    .contact-value { font-size: 13px; color: #1a1a1a; font-weight: 500; }
+
+    /* Footer */
+    .footer { padding: 1.5rem 2rem; border-top: 0.5px solid #e0e0dc; text-align: center; font-size: 12px; color: #ccc; }
+
+    @media (max-width: 600px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-avatar { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .project-body { grid-template-columns: 1fr; }
+      .project-meta { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
+      nav { padding: 1rem 1.25rem; }
+      .hero, .section { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .tags { padding-left: 1.25rem; padding-right: 1.25rem; }
     }
   </style>
 </head>
 <body>
 <div class="wrapper">
 
+  <!-- Nav -->
+  <nav>
+    <span class="nav-name">April Chou</span>
+    <div class="nav-links">
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
   <div class="hero">
-    <div class="hero-tag">Portfolio</div>
-    <div class="hero-name">April Chou</div>
-    <div class="hero-title">Research Assistant · UNC Adams School of Dentistry</div>
-    <div class="hero-bio">Research assistant in orthodontics at the University of North Carolina Adams School of Dentistry, with a background in biostatistics and mathematics. Focused on AI-assisted imaging workflows using 3D Slicer, including segmentation, model training data preparation, and quantitative analysis in a clinical research setting.</div>
-    <div class="tags">
-      <span class="tag">3D Slicer</span>
-      <span class="tag">Medical Image Segmentation</span>
-      <span class="tag">AI / ML Training Data</span>
-      <span class="tag">Biostatistics</span>
-      <span class="tag">Mathematics</span>
-      <span class="tag">DICOM</span>
-      <span class="tag">Orthodontics Research</span>
-      <span class="tag">Python</span>
+    <div class="hero-left">
+      <div class="hero-tag">Portfolio</div>
+      <div class="hero-name">April Chou</div>
+      <div class="hero-title">Research Assistant · UNC Adams School of Dentistry</div>
+      <div class="hero-bio">
+        Research assistant in orthodontics at the University of North Carolina Adams School of Dentistry, studying biostatistics and mathematics. I work at the intersection of clinical research and AI — building training datasets, developing segmentation workflows in 3D Slicer, and applying statistical modeling to craniofacial imaging data.
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">400+</div><div class="stat-label">Scans annotated</div></div>
+        <div class="stat"><div class="stat-num">4</div><div class="stat-label">Research projects</div></div>
+        <div class="stat"><div class="stat-num">UNC</div><div class="stat-label">Chapel Hill, NC</div></div>
+      </div>
     </div>
+    <div class="hero-avatar">AC</div>
   </div>
 
-  <div class="section">
+  <!-- Tags -->
+  <div class="tags">
+    <span class="tag">3D Slicer</span>
+    <span class="tag">CBCT Imaging</span>
+    <span class="tag">Medical Image Segmentation</span>
+    <span class="tag">AI / ML Training Data</span>
+    <span class="tag">Biostatistics</span>
+    <span class="tag">Mathematics</span>
+    <span class="tag">DICOM</span>
+    <span class="tag">Orthodontics Research</span>
+    <span class="tag">Python</span>
+    <span class="tag">R</span>
+    <span class="tag">Cephalometrics</span>
+  </div>
+
+  <!-- Projects -->
+  <div class="section" id="projects">
     <div class="section-label">Featured Projects</div>
-    <div class="grid">
-      <div class="card">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-        </div>
-        <div class="card-title">Craniofacial Segmentation Training Data</div>
-        <div class="card-desc">Annotated CBCT scans of craniofacial structures using 3D Slicer's Segment Editor to support AI model training for orthodontic treatment planning.</div>
-        <span class="card-badge">Completed</span>
+
+    <!-- Project 1 -->
+    <div class="project-card">
+      <div class="project-visual">
+        <!-- SVG: Craniofacial skull illustration with segmentation overlay -->
+        <svg viewBox="0 0 860 220" xmlns="http://www.w3.org/2000/svg">
+          <rect width="860" height="220" fill="#eef2f8"/>
+          <!-- Grid lines -->
+          <line x1="0" y1="55" x2="860" y2="55" stroke="#dce4f0" stroke-width="0.5"/>
+          <line x1="0" y1="110" x2="860" y2="110" stroke="#dce4f0" stroke-width="0.5"/>
+          <line x1="0" y1="165" x2="860" y2="165" stroke="#dce4f0" stroke-width="0.5"/>
+          <line x1="215" y1="0" x2="215" y2="220" stroke="#dce4f0" stroke-width="0.5"/>
+          <line x1="430" y1="0" x2="430" y2="220" stroke="#dce4f0" stroke-width="0.5"/>
+          <line x1="645" y1="0" x2="645" y2="220" stroke="#dce4f0" stroke-width="0.5"/>
+
+          <!-- Skull outline - frontal view -->
+          <g transform="translate(100, 110)">
+            <!-- Cranium -->
+            <ellipse cx="0" cy="-30" rx="62" ry="72" fill="none" stroke="#8faed4" stroke-width="2"/>
+            <!-- Face area -->
+            <rect x="-38" y="30" width="76" height="55" rx="8" fill="none" stroke="#8faed4" stroke-width="2"/>
+            <!-- Eye sockets -->
+            <ellipse cx="-18" cy="38" rx="14" ry="11" fill="#c8daef" stroke="#8faed4" stroke-width="1.5"/>
+            <ellipse cx="18" cy="38" rx="14" ry="11" fill="#c8daef" stroke="#8faed4" stroke-width="1.5"/>
+            <!-- Nasal -->
+            <path d="M-8 52 Q0 65 8 52" fill="none" stroke="#8faed4" stroke-width="1.5"/>
+            <!-- Teeth row -->
+            <rect x="-28" y="70" width="56" height="12" rx="4" fill="#dce9f8" stroke="#8faed4" stroke-width="1.5"/>
+            <!-- Midline -->
+            <line x1="0" y1="-100" x2="0" y2="85" stroke="#b8cde8" stroke-width="0.75" stroke-dasharray="4 3"/>
+            <!-- Label -->
+            <text x="75" y="-30" font-size="10" fill="#5a82b8" font-family="sans-serif">Cranium</text>
+            <text x="75" y="40" font-size="10" fill="#5a82b8" font-family="sans-serif">Orbits</text>
+            <text x="75" y="75" font-size="10" fill="#5a82b8" font-family="sans-serif">Maxilla</text>
+            <line x1="70" y1="-30" x2="60" y2="-30" stroke="#b8cde8" stroke-width="0.75"/>
+            <line x1="70" y1="40" x2="56" y2="40" stroke="#b8cde8" stroke-width="0.75"/>
+            <line x1="70" y1="75" x2="28" y2="75" stroke="#b8cde8" stroke-width="0.75"/>
+          </g>
+
+          <!-- Skull outline - lateral view -->
+          <g transform="translate(310, 110)">
+            <!-- Cranium lateral -->
+            <ellipse cx="0" cy="-28" rx="68" ry="66" fill="none" stroke="#8faed4" stroke-width="2"/>
+            <!-- Face lateral -->
+            <path d="M40 0 Q60 15 55 45 Q50 70 30 82 L-10 82 L-10 30 Z" fill="none" stroke="#8faed4" stroke-width="2"/>
+            <!-- Orbital -->
+            <ellipse cx="36" cy="12" rx="16" ry="12" fill="#c8daef" stroke="#8faed4" stroke-width="1.5"/>
+            <!-- Jaw -->
+            <path d="M-10 82 Q20 95 50 80" fill="none" stroke="#8faed4" stroke-width="2"/>
+            <!-- Spine simulation -->
+            <circle cx="-62" cy="-5" r="10" fill="none" stroke="#a8c2de" stroke-width="1.5"/>
+            <circle cx="-62" cy="18" r="10" fill="none" stroke="#a8c2de" stroke-width="1.5"/>
+            <circle cx="-62" cy="41" r="10" fill="none" stroke="#a8c2de" stroke-width="1.5"/>
+            <!-- SNA/SNB angle lines -->
+            <line x1="-60" y1="-85" x2="55" y2="-5" stroke="#e8a87c" stroke-width="1.2" stroke-dasharray="5 3"/>
+            <line x1="-60" y1="-85" x2="50" y2="75" stroke="#7cbfe8" stroke-width="1.2" stroke-dasharray="5 3"/>
+            <circle cx="-60" cy="-85" r="3" fill="#e8a87c"/>
+            <text x="-90" y="-88" font-size="10" fill="#c07840" font-family="sans-serif">S</text>
+            <text x="58" y="-5" font-size="10" fill="#c07840" font-family="sans-serif">N</text>
+            <text x="53" y="78" font-size="10" fill="#4a9cc0" font-family="sans-serif">A</text>
+          </g>
+
+          <!-- 3D Slicer-style segmentation view -->
+          <g transform="translate(590, 20)">
+            <rect x="0" y="0" width="220" height="180" rx="6" fill="#1a1f2e" stroke="#2d3a52" stroke-width="1"/>
+            <!-- Axial slice simulation -->
+            <ellipse cx="110" cy="90" rx="85" ry="70" fill="#111827" stroke="#1e2940" stroke-width="1"/>
+            <!-- Bone segmentation (teal) -->
+            <ellipse cx="110" cy="90" rx="85" ry="70" fill="none" stroke="#0fb8a0" stroke-width="2.5" stroke-dasharray="0"/>
+            <!-- Inner structures -->
+            <ellipse cx="110" cy="90" rx="60" ry="48" fill="none" stroke="#0fb8a0" stroke-width="1" opacity="0.4"/>
+            <!-- Airway (yellow) -->
+            <ellipse cx="110" cy="108" rx="14" ry="10" fill="#f5c842" opacity="0.7"/>
+            <!-- Left nasal passage -->
+            <ellipse cx="93" cy="92" rx="9" ry="14" fill="#4a9cf0" opacity="0.6"/>
+            <!-- Right nasal passage -->
+            <ellipse cx="127" cy="92" rx="9" ry="14" fill="#4a9cf0" opacity="0.6"/>
+            <!-- Sinus -->
+            <ellipse cx="78" cy="74" rx="16" ry="12" fill="#e87a50" opacity="0.5"/>
+            <ellipse cx="142" cy="74" rx="16" ry="12" fill="#e87a50" opacity="0.5"/>
+            <!-- Crosshair -->
+            <line x1="110" y1="20" x2="110" y2="160" stroke="#3a4a70" stroke-width="0.75"/>
+            <line x1="25" y1="90" x2="195" y2="90" stroke="#3a4a70" stroke-width="0.75"/>
+            <!-- Corner labels -->
+            <text x="6" y="14" font-size="8" fill="#4a9cf0" font-family="monospace">AX</text>
+            <text x="170" y="14" font-size="8" fill="#888" font-family="monospace">R</text>
+            <text x="6" y="176" font-size="8" fill="#888" font-family="monospace">L</text>
+            <!-- Legend dots -->
+            <circle cx="8" cy="162" r="4" fill="#0fb8a0"/>
+            <text x="15" y="166" font-size="7" fill="#0fb8a0" font-family="monospace">Bone</text>
+            <circle cx="52" cy="162" r="4" fill="#f5c842"/>
+            <text x="59" y="166" font-size="7" fill="#f5c842" font-family="monospace">Airway</text>
+            <circle cx="100" cy="162" r="4" fill="#e87a50"/>
+            <text x="107" y="166" font-size="7" fill="#e87a50" font-family="monospace">Sinus</text>
+          </g>
+
+          <!-- Title label bottom left -->
+          <text x="16" y="208" font-size="10" fill="#8faed4" font-family="sans-serif">Craniofacial anatomy · frontal / lateral / axial CBCT segmentation</text>
+        </svg>
       </div>
-      <div class="card">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      <div class="project-body">
+        <div>
+          <div class="project-title">Craniofacial Segmentation Training Dataset</div>
+          <div class="project-desc">Annotated 400+ CBCT scans of craniofacial structures — including the cranium, orbits, maxilla, mandible, nasal passages, and sinuses — using 3D Slicer's Segment Editor. Scans were exported as structured NIFTI files and used as ground-truth training data for a deep learning model targeting automated orthodontic treatment planning. Developed consistent labeling protocols and performed cross-validation review to ensure dataset quality.</div>
+          <div class="project-tools">
+            <span class="tool-tag">3D Slicer</span>
+            <span class="tool-tag">Segment Editor</span>
+            <span class="tool-tag">NIFTI</span>
+            <span class="tool-tag">CBCT</span>
+            <span class="tool-tag">Python</span>
+          </div>
         </div>
-        <div class="card-title">Biostatistical Analysis of Treatment Outcomes</div>
-        <div class="card-desc">Applied statistical modeling to orthodontic patient data to identify predictors of treatment success, using R and Python for analysis and visualization.</div>
-        <span class="card-badge">Completed</span>
-      </div>
-      <div class="card">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        <div class="project-meta">
+          <span class="badge badge-green">Completed</span>
+          <span class="badge badge-blue">AI Training</span>
         </div>
-        <div class="card-title">Landmark Identification QA Workflow</div>
-        <div class="card-desc">Developed a quality assurance protocol for cephalometric landmark annotations, ensuring consistency across research team members and improving inter-rater reliability.</div>
-        <span class="card-badge ongoing">Ongoing</span>
-      </div>
-      <div class="card">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-        </div>
-        <div class="card-title">DICOM Data Pipeline Documentation</div>
-        <div class="card-desc">Documented workflows for importing, anonymizing, and exporting DICOM imaging data within 3D Slicer for use in IRB-approved clinical research studies.</div>
-        <span class="card-badge">Completed</span>
       </div>
     </div>
+
+    <!-- Project 2 -->
+    <div class="project-card">
+      <div class="project-visual">
+        <!-- SVG: Cephalometric landmark diagram -->
+        <svg viewBox="0 0 860 220" xmlns="http://www.w3.org/2000/svg">
+          <rect width="860" height="220" fill="#f5f0eb"/>
+          <!-- Lateral skull silhouette -->
+          <g transform="translate(120, 110)">
+            <!-- Skull outline -->
+            <path d="M-20,-90 Q40,-95 70,-60 Q95,-30 90,10 Q85,50 70,75 Q55,95 30,100 Q5,105 -15,95 Q-35,85 -45,65 Q-55,45 -55,20 Q-55,-5 -45,-30 Q-35,-55 -20,-90 Z" fill="#ede8e0" stroke="#c4b49a" stroke-width="1.5"/>
+            <!-- Mandible -->
+            <path d="M30,100 Q55,115 65,105 Q80,90 75,70" fill="none" stroke="#c4b49a" stroke-width="1.5"/>
+            <!-- Orbital -->
+            <ellipse cx="45" cy="5" rx="20" ry="15" fill="none" stroke="#c4b49a" stroke-width="1"/>
+            <!-- Nasion area -->
+            <path d="M25,-55 Q35,-50 45,-55" fill="none" stroke="#c4b49a" stroke-width="1"/>
+            <!-- Teeth -->
+            <rect x="20" y="78" width="45" height="10" rx="3" fill="#fff" stroke="#c4b49a" stroke-width="1"/>
+            <rect x="25" y="88" width="45" height="10" rx="3" fill="#fff" stroke="#c4b49a" stroke-width="1"/>
+
+            <!-- Cephalometric landmarks -->
+            <!-- S - Sella -->
+            <circle cx="-28" cy="-42" r="4.5" fill="#e85c5c" stroke="#fff" stroke-width="1.5"/>
+            <text x="-42" y="-50" font-size="10" fill="#e85c5c" font-family="sans-serif" font-weight="500">S</text>
+            <!-- N - Nasion -->
+            <circle cx="28" cy="-55" r="4.5" fill="#e85c5c" stroke="#fff" stroke-width="1.5"/>
+            <text x="32" y="-62" font-size="10" fill="#e85c5c" font-family="sans-serif" font-weight="500">N</text>
+            <!-- A point -->
+            <circle cx="62" cy="35" r="4.5" fill="#4a9cf0" stroke="#fff" stroke-width="1.5"/>
+            <text x="68" y="33" font-size="10" fill="#4a9cf0" font-family="sans-serif" font-weight="500">A</text>
+            <!-- B point -->
+            <circle cx="58" cy="65" r="4.5" fill="#4a9cf0" stroke="#fff" stroke-width="1.5"/>
+            <text x="64" y="63" font-size="10" fill="#4a9cf0" font-family="sans-serif" font-weight="500">B</text>
+            <!-- Pogonion -->
+            <circle cx="50" cy="88" r="4.5" fill="#9b6fe8" stroke="#fff" stroke-width="1.5"/>
+            <text x="55" y="98" font-size="10" fill="#9b6fe8" font-family="sans-serif" font-weight="500">Pog</text>
+            <!-- Menton -->
+            <circle cx="36" cy="100" r="4.5" fill="#9b6fe8" stroke="#fff" stroke-width="1.5"/>
+            <text x="10" y="112" font-size="10" fill="#9b6fe8" font-family="sans-serif" font-weight="500">Me</text>
+            <!-- Orbitale -->
+            <circle cx="65" cy="18" r="4.5" fill="#2db87a" stroke="#fff" stroke-width="1.5"/>
+            <text x="70" y="16" font-size="10" fill="#2db87a" font-family="sans-serif" font-weight="500">Or</text>
+            <!-- Porion -->
+            <circle cx="-50" cy="18" r="4.5" fill="#2db87a" stroke="#fff" stroke-width="1.5"/>
+            <text x="-68" y="16" font-size="10" fill="#2db87a" font-family="sans-serif" font-weight="500">Po</text>
+
+            <!-- SNA line -->
+            <line x1="-28" y1="-42" x2="28" y2="-55" stroke="#e85c5c" stroke-width="1" stroke-dasharray="4 2" opacity="0.7"/>
+            <line x1="28" y1="-55" x2="62" y2="35" stroke="#4a9cf0" stroke-width="1" stroke-dasharray="4 2" opacity="0.7"/>
+            <!-- SNB line -->
+            <line x1="28" y1="-55" x2="58" y2="65" stroke="#4a9cf0" stroke-width="1" stroke-dasharray="4 2" opacity="0.5"/>
+            <!-- FH plane -->
+            <line x1="-55" y1="18" x2="80" y2="18" stroke="#2db87a" stroke-width="1" stroke-dasharray="5 3" opacity="0.6"/>
+          </g>
+
+          <!-- Angle measurements panel -->
+          <g transform="translate(370, 25)">
+            <rect x="0" y="0" width="200" height="170" rx="8" fill="#fff" stroke="#e0d8cc" stroke-width="0.75"/>
+            <text x="12" y="20" font-size="11" fill="#888" font-family="sans-serif" font-weight="500">CEPHALOMETRIC ANALYSIS</text>
+            <line x1="12" y1="28" x2="188" y2="28" stroke="#e8e4dc" stroke-width="0.5"/>
+
+            <!-- Measurements -->
+            <text x="12" y="48" font-size="12" fill="#333" font-family="sans-serif">SNA angle</text>
+            <text x="155" y="48" font-size="12" fill="#e85c5c" font-family="sans-serif" font-weight="500">82.5°</text>
+            <text x="12" y="48" font-size="10" fill="#aaa" font-family="sans-serif" dy="13">norm: 82 ± 2°</text>
+
+            <text x="12" y="88" font-size="12" fill="#333" font-family="sans-serif">SNB angle</text>
+            <text x="155" y="88" font-size="12" fill="#4a9cf0" font-family="sans-serif" font-weight="500">79.1°</text>
+            <text x="12" y="88" font-size="10" fill="#aaa" font-family="sans-serif" dy="13">norm: 80 ± 2°</text>
+
+            <text x="12" y="128" font-size="12" fill="#333" font-family="sans-serif">ANB angle</text>
+            <text x="155" y="128" font-size="12" fill="#9b6fe8" font-family="sans-serif" font-weight="500">3.4°</text>
+            <text x="12" y="128" font-size="10" fill="#aaa" font-family="sans-serif" dy="13">norm: 2 ± 2°</text>
+
+            <text x="12" y="165" font-size="12" fill="#333" font-family="sans-serif">FH–MP</text>
+            <text x="155" y="165" font-size="12" fill="#2db87a" font-family="sans-serif" font-weight="500">26.8°</text>
+          </g>
+
+          <!-- Legend -->
+          <g transform="translate(590, 30)">
+            <text x="0" y="0" font-size="10" fill="#888" font-family="sans-serif" font-weight="500">LANDMARK KEY</text>
+            <circle cx="6" cy="16" r="4" fill="#e85c5c"/>
+            <text x="14" y="20" font-size="10" fill="#666" font-family="sans-serif">Cranial base (S, N)</text>
+            <circle cx="6" cy="34" r="4" fill="#4a9cf0"/>
+            <text x="14" y="38" font-size="10" fill="#666" font-family="sans-serif">Maxilla / Mandible (A, B)</text>
+            <circle cx="6" cy="52" r="4" fill="#9b6fe8"/>
+            <text x="14" y="56" font-size="10" fill="#666" font-family="sans-serif">Chin (Pog, Me)</text>
+            <circle cx="6" cy="70" r="4" fill="#2db87a"/>
+            <text x="14" y="74" font-size="10" fill="#666" font-family="sans-serif">FH plane (Po, Or)</text>
+            <line x1="0" y1="88" x2="12" y2="88" stroke="#e85c5c" stroke-width="1.5" stroke-dasharray="3 2"/>
+            <text x="14" y="92" font-size="10" fill="#666" font-family="sans-serif">Angle lines</text>
+            <line x1="0" y1="106" x2="12" y2="106" stroke="#2db87a" stroke-width="1.5" stroke-dasharray="4 2"/>
+            <text x="14" y="110" font-size="10" fill="#666" font-family="sans-serif">Reference planes</text>
+          </g>
+
+          <text x="16" y="210" font-size="10" fill="#c4b49a" font-family="sans-serif">Cephalometric landmark analysis · lateral view · illustrative</text>
+        </svg>
+      </div>
+      <div class="project-body">
+        <div>
+          <div class="project-title">Cephalometric Landmark Identification & QA</div>
+          <div class="project-desc">Developed a quality assurance protocol for cephalometric landmark annotation on lateral skull radiographs, covering key points including Sella (S), Nasion (N), A-point, B-point, and Pogonion. Established inter-rater reliability metrics across a team of 6 annotators, reducing landmark placement error and improving consistency of AI training data for automated cephalometric analysis tools.</div>
+          <div class="project-tools">
+            <span class="tool-tag">3D Slicer</span>
+            <span class="tool-tag">SlicerCMF</span>
+            <span class="tool-tag">R</span>
+            <span class="tool-tag">ICC Analysis</span>
+            <span class="tool-tag">Cephalometrics</span>
+          </div>
+        </div>
+        <div class="project-meta">
+          <span class="badge badge-amber">Ongoing</span>
+          <span class="badge badge-blue">QA Research</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="project-card">
+      <div class="project-visual">
+        <!-- SVG: Statistical analysis / data viz -->
+        <svg viewBox="0 0 860 220" xmlns="http://www.w3.org/2000/svg">
+          <rect width="860" height="220" fill="#f8f9fc"/>
+          <!-- Chart grid -->
+          <g transform="translate(60, 20)">
+            <!-- Axes -->
+            <line x1="0" y1="160" x2="340" y2="160" stroke="#dde" stroke-width="1"/>
+            <line x1="0" y1="0" x2="0" y2="160" stroke="#dde" stroke-width="1"/>
+            <!-- Grid -->
+            <line x1="0" y1="40" x2="340" y2="40" stroke="#eef" stroke-width="0.5"/>
+            <line x1="0" y1="80" x2="340" y2="80" stroke="#eef" stroke-width="0.5"/>
+            <line x1="0" y1="120" x2="340" y2="120" stroke="#eef" stroke-width="0.5"/>
+            <!-- Y labels -->
+            <text x="-8" y="164" font-size="9" fill="#aaa" font-family="sans-serif" text-anchor="end">0</text>
+            <text x="-8" y="124" font-size="9" fill="#aaa" font-family="sans-serif" text-anchor="end">25</text>
+            <text x="-8" y="84" font-size="9" fill="#aaa" font-family="sans-serif" text-anchor="end">50</text>
+            <text x="-8" y="44" font-size="9" fill="#aaa" font-family="sans-serif" text-anchor="end">75</text>
+            <!-- Scatter plot: treatment outcome vs ANB angle -->
+            <!-- Group 1: Class I (green) -->
+            <circle cx="85" cy="45" r="5" fill="#4a9cf0" opacity="0.75"/>
+            <circle cx="100" cy="60" r="5" fill="#4a9cf0" opacity="0.75"/>
+            <circle cx="115" cy="52" r="5" fill="#4a9cf0" opacity="0.75"/>
+            <circle cx="130" cy="40" r="5" fill="#4a9cf0" opacity="0.75"/>
+            <circle cx="145" cy="55" r="5" fill="#4a9cf0" opacity="0.75"/>
+            <circle cx="160" cy="48" r="5" fill="#4a9cf0" opacity="0.75"/>
+            <circle cx="175" cy="38" r="5" fill="#4a9cf0" opacity="0.75"/>
+            <circle cx="155" cy="62" r="5" fill="#4a9cf0" opacity="0.75"/>
+            <circle cx="170" cy="44" r="5" fill="#4a9cf0" opacity="0.75"/>
+            <!-- Group 2: Class II (orange) -->
+            <circle cx="210" cy="80" r="5" fill="#e87a50" opacity="0.75"/>
+            <circle cx="225" cy="95" r="5" fill="#e87a50" opacity="0.75"/>
+            <circle cx="240" cy="88" r="5" fill="#e87a50" opacity="0.75"/>
+            <circle cx="255" cy="75" r="5" fill="#e87a50" opacity="0.75"/>
+            <circle cx="235" cy="100" r="5" fill="#e87a50" opacity="0.75"/>
+            <circle cx="250" cy="92" r="5" fill="#e87a50" opacity="0.75"/>
+            <circle cx="265" cy="85" r="5" fill="#e87a50" opacity="0.75"/>
+            <!-- Group 3: Class III (purple) -->
+            <circle cx="300" cy="115" r="5" fill="#9b6fe8" opacity="0.75"/>
+            <circle cx="315" cy="128" r="5" fill="#9b6fe8" opacity="0.75"/>
+            <circle cx="295" cy="122" r="5" fill="#9b6fe8" opacity="0.75"/>
+            <circle cx="310" cy="110" r="5" fill="#9b6fe8" opacity="0.75"/>
+            <circle cx="325" cy="118" r="5" fill="#9b6fe8" opacity="0.75"/>
+            <!-- Regression line -->
+            <line x1="70" y1="35" x2="330" y2="135" stroke="#888" stroke-width="1.5" stroke-dasharray="6 3" opacity="0.5"/>
+            <!-- Axis labels -->
+            <text x="170" y="178" font-size="10" fill="#888" font-family="sans-serif" text-anchor="middle">ANB Angle (°)</text>
+            <text x="-30" y="80" font-size="10" fill="#888" font-family="sans-serif" text-anchor="middle" transform="rotate(-90, -30, 80)">Treatment Duration (wks)</text>
+            <!-- Title -->
+            <text x="170" y="-6" font-size="11" fill="#555" font-family="sans-serif" text-anchor="middle" font-weight="500">Treatment Duration vs. ANB Angle</text>
+            <!-- X labels -->
+            <text x="85" y="173" font-size="9" fill="#aaa" font-family="sans-serif" text-anchor="middle">2°</text>
+            <text x="170" y="173" font-size="9" fill="#aaa" font-family="sans-serif" text-anchor="middle">5°</text>
+            <text x="255" y="173" font-size="9" fill="#aaa" font-family="sans-serif" text-anchor="middle">8°</text>
+            <text x="325" y="173" font-size="9" fill="#aaa" font-family="sans-serif" text-anchor="middle">11°</text>
+          </g>
+
+          <!-- Stats summary panel -->
+          <g transform="translate(450, 20)">
+            <rect x="0" y="0" width="190" height="178" rx="8" fill="#fff" stroke="#e0e4f0" stroke-width="0.75"/>
+            <text x="12" y="20" font-size="11" fill="#888" font-family="sans-serif" font-weight="500">MODEL SUMMARY</text>
+            <line x1="12" y1="28" x2="178" y2="28" stroke="#eef" stroke-width="0.5"/>
+            <text x="12" y="46" font-size="11" fill="#555" font-family="sans-serif">R²</text>
+            <text x="145" y="46" font-size="13" fill="#185fa5" font-family="sans-serif" font-weight="500">0.74</text>
+            <text x="12" y="68" font-size="11" fill="#555" font-family="sans-serif">p-value</text>
+            <text x="130" y="68" font-size="13" fill="#185fa5" font-family="sans-serif" font-weight="500">&lt; 0.001</text>
+            <text x="12" y="90" font-size="11" fill="#555" font-family="sans-serif">n (patients)</text>
+            <text x="148" y="90" font-size="13" fill="#185fa5" font-family="sans-serif" font-weight="500">312</text>
+            <text x="12" y="112" font-size="11" fill="#555" font-family="sans-serif">Predictors</text>
+            <text x="130" y="112" font-size="13" fill="#185fa5" font-family="sans-serif" font-weight="500">ANB, SNA</text>
+            <line x1="12" y1="122" x2="178" y2="122" stroke="#eef" stroke-width="0.5"/>
+            <!-- Legend -->
+            <circle cx="20" cy="138" r="5" fill="#4a9cf0" opacity="0.8"/>
+            <text x="30" y="142" font-size="10" fill="#666" font-family="sans-serif">Class I (n=134)</text>
+            <circle cx="20" cy="155" r="5" fill="#e87a50" opacity="0.8"/>
+            <text x="30" y="159" font-size="10" fill="#666" font-family="sans-serif">Class II (n=108)</text>
+            <circle cx="20" cy="172" r="5" fill="#9b6fe8" opacity="0.8"/>
+            <text x="30" y="176" font-size="10" fill="#666" font-family="sans-serif">Class III (n=70)</text>
+          </g>
+
+          <!-- Box plots panel -->
+          <g transform="translate(660, 20)">
+            <rect x="0" y="0" width="170" height="178" rx="8" fill="#fff" stroke="#e0e4f0" stroke-width="0.75"/>
+            <text x="12" y="20" font-size="11" fill="#888" font-family="sans-serif" font-weight="500">DURATION BY CLASS</text>
+            <line x1="12" y1="28" x2="158" y2="28" stroke="#eef" stroke-width="0.5"/>
+            <!-- Box plot Class I -->
+            <line x1="45" y1="50" x2="45" y2="68" stroke="#4a9cf0" stroke-width="1.5"/>
+            <rect x="30" y="68" width="30" height="28" fill="#e6f1fb" stroke="#4a9cf0" stroke-width="1.5"/>
+            <line x1="30" y1="80" x2="60" y2="80" stroke="#4a9cf0" stroke-width="2"/>
+            <line x1="45" y1="96" x2="45" y2="110" stroke="#4a9cf0" stroke-width="1.5"/>
+            <text x="45" y="122" font-size="9" fill="#4a9cf0" font-family="sans-serif" text-anchor="middle">Class I</text>
+            <!-- Box plot Class II -->
+            <line x1="90" y1="65" x2="90" y2="85" stroke="#e87a50" stroke-width="1.5"/>
+            <rect x="75" y="85" width="30" height="35" fill="#fdf0e8" stroke="#e87a50" stroke-width="1.5"/>
+            <line x1="75" y1="100" x2="105" y2="100" stroke="#e87a50" stroke-width="2"/>
+            <line x1="90" y1="120" x2="90" y2="135" stroke="#e87a50" stroke-width="1.5"/>
+            <text x="90" y="147" font-size="9" fill="#e87a50" font-family="sans-serif" text-anchor="middle">Class II</text>
+            <!-- Box plot Class III -->
+            <line x1="135" y1="80" x2="135" y2="100" stroke="#9b6fe8" stroke-width="1.5"/>
+            <rect x="120" y="100" width="30" height="38" fill="#f0ebfc" stroke="#9b6fe8" stroke-width="1.5"/>
+            <line x1="120" y1="116" x2="150" y2="116" stroke="#9b6fe8" stroke-width="2"/>
+            <line x1="135" y1="138" x2="135" y2="150" stroke="#9b6fe8" stroke-width="1.5"/>
+            <text x="135" y="162" font-size="9" fill="#9b6fe8" font-family="sans-serif" text-anchor="middle">Class III</text>
+            <!-- Y axis -->
+            <text x="18" y="55" font-size="8" fill="#bbb" font-family="sans-serif">20</text>
+            <text x="18" y="100" font-size="8" fill="#bbb" font-family="sans-serif">40</text>
+            <text x="18" y="145" font-size="8" fill="#bbb" font-family="sans-serif">60</text>
+          </g>
+
+          <text x="16" y="210" font-size="10" fill="#aab" font-family="sans-serif">Statistical analysis of orthodontic treatment outcomes · illustrative data</text>
+        </svg>
+      </div>
+      <div class="project-body">
+        <div>
+          <div class="project-title">Biostatistical Analysis of Orthodontic Treatment Outcomes</div>
+          <div class="project-desc">Applied linear regression and mixed-effects models to orthodontic patient data to identify predictors of treatment duration and success. Key predictors included ANB angle, SNA, and Frankfort-Mandibular plane angle. Analysis stratified patients by skeletal classification (Class I, II, III). Results visualized in R using ggplot2 and shared with the clinical research team at UNC.</div>
+          <div class="project-tools">
+            <span class="tool-tag">R</span>
+            <span class="tool-tag">ggplot2</span>
+            <span class="tool-tag">Python</span>
+            <span class="tool-tag">Linear Regression</span>
+            <span class="tool-tag">Mixed Models</span>
+            <span class="tool-tag">Biostatistics</span>
+          </div>
+        </div>
+        <div class="project-meta">
+          <span class="badge badge-green">Completed</span>
+          <span class="badge badge-blue">Statistics</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 
-  <hr class="divider">
-
-  <div class="section">
+  <!-- Skills -->
+  <div class="section" id="skills">
     <div class="section-label">Skills & Tools</div>
     <div class="skills-grid">
-      <div class="skill-item"><div class="skill-name">3D Slicer</div><div class="skill-bar-bg"><div class="skill-bar" style="width:95%"></div></div></div>
-      <div class="skill-item"><div class="skill-name">Biostatistics</div><div class="skill-bar-bg"><div class="skill-bar" style="width:90%"></div></div></div>
-      <div class="skill-item"><div class="skill-name">Segmentation</div><div class="skill-bar-bg"><div class="skill-bar" style="width:90%"></div></div></div>
-      <div class="skill-item"><div class="skill-name">DICOM Handling</div><div class="skill-bar-bg"><div class="skill-bar" style="width:85%"></div></div></div>
-      <div class="skill-item"><div class="skill-name">Python / R</div><div class="skill-bar-bg"><div class="skill-bar" style="width:78%"></div></div></div>
-      <div class="skill-item"><div class="skill-name">QA / Annotation Review</div><div class="skill-bar-bg"><div class="skill-bar" style="width:88%"></div></div></div>
+      <div class="skill-item">
+        <div class="skill-name">3D Slicer</div>
+        <div class="skill-bar-bg"><div class="skill-bar" style="width:95%"></div></div>
+        <div class="skill-level">Advanced</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">Biostatistics</div>
+        <div class="skill-bar-bg"><div class="skill-bar" style="width:90%"></div></div>
+        <div class="skill-level">Advanced</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">Medical Image Segmentation</div>
+        <div class="skill-bar-bg"><div class="skill-bar" style="width:90%"></div></div>
+        <div class="skill-level">Advanced</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">DICOM Handling</div>
+        <div class="skill-bar-bg"><div class="skill-bar" style="width:85%"></div></div>
+        <div class="skill-level">Proficient</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">Python</div>
+        <div class="skill-bar-bg"><div class="skill-bar" style="width:78%"></div></div>
+        <div class="skill-level">Proficient</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">R / ggplot2</div>
+        <div class="skill-bar-bg"><div class="skill-bar" style="width:82%"></div></div>
+        <div class="skill-level">Proficient</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">Cephalometrics</div>
+        <div class="skill-bar-bg"><div class="skill-bar" style="width:85%"></div></div>
+        <div class="skill-level">Proficient</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">QA / Annotation Review</div>
+        <div class="skill-bar-bg"><div class="skill-bar" style="width:88%"></div></div>
+        <div class="skill-level">Advanced</div>
+      </div>
     </div>
   </div>
 
-  <hr class="divider">
+  <!-- About -->
+  <div class="section" id="about">
+    <div class="section-label">About</div>
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="about-card-label">Role</div>
+        <div class="about-card-value">Research Assistant, Orthodontics</div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-label">Institution</div>
+        <div class="about-card-value">UNC Adams School of Dentistry</div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-label">Studies</div>
+        <div class="about-card-value">Biostatistics & Mathematics</div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-label">Location</div>
+        <div class="about-card-value">Chapel Hill, NC</div>
+      </div>
+    </div>
+  </div>
 
-  <div class="section footer">
+  <!-- Contact -->
+  <div class="section" id="contact">
     <div class="section-label">Contact</div>
-    <div class="contact-row">
-      <div class="contact-item">Institution <span>UNC Adams School of Dentistry</span></div>
-      <div class="contact-item">Location <span>Chapel Hill, NC</span></div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-label">Email</div>
+        <div class="contact-value">yourname@unc.edu</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-label">LinkedIn</div>
+        <div class="contact-value">linkedin.com/in/aprilchou</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-label">GitHub</div>
+        <div class="contact-value">github.com/aprilchou</div>
+      </div>
     </div>
   </div>
+
+  <div class="footer">© 2026 April Chou · UNC Adams School of Dentistry</div>
 
 </div>
 </body>
